@@ -1,14 +1,14 @@
 // src/components/Header.tsx
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Menu } from "lucide-react"; // Import Menu icon
-import { Button } from "@/components/ui/button"; // Import Button
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"; // Import Sheet components
-import React from "react";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button"; // cite: uploaded:daviteclas/vision-to-views/vision-to-views-8b064a1494f431541710cbd1ddd03ddcf6f12275/src/components/ui/button.tsx
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"; // cite: uploaded:daviteclas/vision-to-views/vision-to-views-8b064a1494f431541710cbd1ddd03ddcf6f12275/src/components/ui/sheet.tsx
 
 const Header = () => {
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false); // State for mobile menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -24,7 +24,6 @@ const Header = () => {
     { label: "CONTA", path: "/conta" },
   ];
 
-  // Function to close mobile menu on link click
   const handleLinkClick = () => {
     setIsMobileMenuOpen(false);
   };
@@ -32,46 +31,30 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-[#0f1729] backdrop-blur">
-      {/* Adjusted padding: px-4 for small screens, sm:px-8 for larger */}
-      <div className="container flex h-16 items-center justify-between px-4 sm:px-8">
+      {/* Container com posicionamento relativo para o logo absoluto */}
+      <div className="container relative flex h-16 items-center justify-between px-4 sm:px-8">
 
-        {/* Left Navigation - Hidden on small screens (md:flex) */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={cn(
-                "text-sm font-medium tracking-wide transition-colors hover:text-primary",
-                isActive(item.path) ? "text-primary" : "text-foreground/80"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Placeholder for left content on small screens to balance the layout */}
-        <div className="md:hidden flex-1">
-             {/* Mobile Menu Button - Visible only on small screens (md:hidden) */}
-             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        {/* Lado Esquerdo: Botão de Menu (sempre visível) + Navegação (visível em md+) */}
+        <div className="flex items-center gap-2 sm:gap-4">
+            {/* --- Botão de Menu Mobile --- */}
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="md:hidden text-foreground/80 hover:text-primary">
+                  {/* Removido md:hidden para ser sempre visível */}
+                  <Button variant="ghost" size="icon" className="text-foreground/80 hover:text-primary">
                       <Menu className="h-6 w-6" />
                       <span className="sr-only">Abrir menu</span>
                   </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-[250px] bg-[#0f1729] border-border pt-10">
-                   {/* Mobile Menu Content */}
+                   {/* Conteúdo do Menu Mobile */}
                    <nav className="flex flex-col gap-4 px-4">
-                      {/* Combine all nav items for mobile menu */}
                       {[...navItems, ...rightItems].map((item) => (
                           <Link
                           key={item.path}
                           to={item.path}
-                          onClick={handleLinkClick} // Close menu on click
+                          onClick={handleLinkClick}
                           className={cn(
-                              "text-lg font-medium transition-colors hover:text-primary", // Larger text for mobile
+                              "text-lg font-medium transition-colors hover:text-primary",
                               isActive(item.path) ? "text-primary" : "text-foreground/80"
                           )}
                           >
@@ -81,36 +64,50 @@ const Header = () => {
                    </nav>
               </SheetContent>
             </Sheet>
+            {/* --- Fim do Botão de Menu --- */}
+
+          {/* Navegação Esquerda - Visível a partir de 'md' */}
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "text-sm font-medium tracking-wide transition-colors hover:text-primary whitespace-nowrap", // Adicionado whitespace-nowrap
+                  isActive(item.path) ? "text-primary" : "text-foreground/80"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
-
-        {/* Logo - Adjusted absolute positioning slightly */}
-        <div className="absolute left-1/2 -translate-x-1/2">
-            {/* Logo slightly smaller on small screens? Optional */}
-          <Link to="/" className="text-xl sm:text-2xl font-bold tracking-wider text-primary">
+        {/* Logo Centralizado Absolutamente */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Link to="/" className="text-xl sm:text-2xl font-bold tracking-wider text-primary whitespace-nowrap"> {/* Adicionado whitespace-nowrap */}
             OPORTUNIZA
           </Link>
         </div>
 
-        {/* Right Navigation - Hidden on small screens (md:flex) */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8 flex-1 justify-end">
-          {rightItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={cn(
-                "text-sm font-medium tracking-wide transition-colors hover:text-primary",
-                isActive(item.path) ? "text-primary" : "text-foreground/80"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-         {/* Placeholder for right content on small screens */}
-         <div className="md:hidden flex-1"></div>
-
+        {/* Lado Direito: Navegação (visível em md+) */}
+        <div className="flex items-center">
+          {/* Navegação Direita - Visível a partir de 'md' */}
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6">
+            {rightItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "text-sm font-medium tracking-wide transition-colors hover:text-primary whitespace-nowrap", // Adicionado whitespace-nowrap
+                  isActive(item.path) ? "text-primary" : "text-foreground/80"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
 
       </div>
     </header>

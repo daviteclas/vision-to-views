@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   // Modifique esta linha:
-  base: "/vision-to-views/", // Nome do seu repositório GitHub
+  // base: "/vision-to-views/", // Nome do seu repositório GitHub
 
   server: {
     host: "::",
