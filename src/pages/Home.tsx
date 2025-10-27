@@ -32,23 +32,7 @@ const sampleTrails: KnowledgeTrail[] = [
     category: "Negócios",
     icon: Briefcase,
     imageUrl: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Liderança Eficaz para Equipes",
-    description: "Desenvolva habilidades de liderança, comunicação e motivação de equipes.",
-    category: "Carreira",
-    icon: Users,
-    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Introdução à Programação Web",
-    description: "Comece sua jornada na programação aprendendo HTML, CSS e JavaScript.",
-    category: "Tecnologia",
-    icon: BookOpen,
-    imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop",
-  },
+  }
 ];
 // --- Fim dos dados ---
 
