@@ -13,6 +13,7 @@ import Chat from "./pages/Chat";
 import Perfil from "./pages/Perfil";
 import Conta from "./pages/Conta";
 import NotFound from "./pages/NotFound";
+import KnowledgeTrailPage from "./pages/KnowledgeTrailPage"; // Importar o novo componente
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,8 @@ const App = () => (
           <Route path="/chat" element={<Chat />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/conta" element={<Conta />} />
+          {/* Nova rota para as trilhas de conhecimento */}
+          <Route path="/trilhas/:trailId" element={<KnowledgeTrailPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

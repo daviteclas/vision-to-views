@@ -5,9 +5,25 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+// Definindo um tipo para as mensagens para melhor organização
+type Message = {
+  id: number;
+  text: string;
+  sent: boolean; // true se enviada pelo usuário atual, false se recebida
+};
+
 const Chat = () => {
   const [message, setMessage] = useState("");
-  
+  // Estado inicial das mensagens (pode vir de uma API no futuro)
+  const initialMessages: Message[] = [
+    { id: 1, text: "Olá! Como você está?", sent: false },
+    { id: 2, text: "Estou bem, obrigado! E você?", sent: true },
+    { id: 3, text: "Também estou bem!", sent: false },
+    { id: 4, text: "Ótimo! Vamos conversar sobre o projeto?", sent: true },
+  ];
+  // Estado dinâmico para as mensagens
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
+
   const contacts = [
     { id: 1, name: "User 1", type: "user" },
     { id: 2, name: "User 2", type: "user" },
@@ -17,20 +33,34 @@ const Chat = () => {
     { id: 6, name: "User 4", type: "user" },
     { id: 7, name: "User 5", type: "user" },
   ];
-  
+
   const [activeChat, setActiveChat] = useState(contacts[0]);
-  
-  const messages = [
-    { id: 1, text: "Olá! Como você está?", sent: false },
-    { id: 2, text: "Estou bem, obrigado! E você?", sent: true },
-    { id: 3, text: "Também estou bem!", sent: false },
-    { id: 4, text: "Ótimo! Vamos conversar sobre o projeto?", sent: true },
-  ];
+
+  // Função para enviar a mensagem
+  const handleSendMessage = () => {
+    if (message.trim() === "") return; // Não envia mensagens vazias
+
+    const newMessage: Message = {
+      id: messages.length + 1, // Simples ID baseado no tamanho atual (melhorar em produção)
+      text: message,
+      sent: true, // Assumindo que a mensagem enviada é sempre do usuário atual
+    };
+
+    setMessages([...messages, newMessage]); // Adiciona a nova mensagem ao array
+    setMessage(""); // Limpa o campo de input
+  };
+
+  // Função para lidar com o pressionar da tecla Enter
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <div className="container mx-auto px-8 py-6 h-[calc(100vh-4rem)]">
         <div className="grid grid-cols-[320px_1fr] gap-6 h-full">
           {/* Sidebar */}
@@ -45,7 +75,7 @@ const Chat = () => {
                 />
               </div>
             </div>
-            
+
             {/* Action Buttons */}
             <div className="p-4 border-b border-border flex gap-2">
               <Button
@@ -65,7 +95,7 @@ const Chat = () => {
                 ADICIONAR CHAT
               </Button>
             </div>
-            
+
             {/* Contacts List */}
             <div className="flex-1 overflow-y-auto">
               {contacts.map((contact) => (
@@ -91,7 +121,7 @@ const Chat = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Chat Area */}
           <div className="bg-card rounded-lg border border-border flex flex-col">
             {/* Chat Header */}
@@ -104,9 +134,10 @@ const Chat = () => {
               </Avatar>
               <span className="font-medium text-foreground">{activeChat.name}</span>
             </div>
-            
+
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              {/* Mapeia o estado dinâmico 'messages' */}
               {messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -124,7 +155,7 @@ const Chat = () => {
                 </div>
               ))}
             </div>
-            
+
             {/* Message Input */}
             <div className="p-4 border-t border-border">
               <div className="flex gap-3">
@@ -133,17 +164,12 @@ const Chat = () => {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Digite a sua mensagem aqui..."
                   className="flex-1 h-12 rounded-full bg-input border-0"
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") {
-                      // Handle send message
-                      setMessage("");
-                    }
-                  }}
+                  onKeyPress={handleKeyPress} // Chama handleKeyPress no evento onKeyPress
                 />
                 <Button
                   size="icon"
                   className="h-12 w-12 rounded-full bg-primary hover:bg-primary/90"
-                  onClick={() => setMessage("")}
+                  onClick={handleSendMessage} // Chama handleSendMessage no clique
                 >
                   <Send className="h-5 w-5" />
                 </Button>
