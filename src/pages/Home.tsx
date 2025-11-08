@@ -62,7 +62,7 @@ const Home = () => {
             {/* Padding ajustado */}
             <div className="bg-card click rounded-lg p-4 sm:p-8 border border-border"  onClick={() => handleTrailClick()}>
               <img
-                src="../../public/imgs/ia.png"
+                src="/imgs/ia.png"
                 alt="AI Technology"
                 className="w-full rounded-lg mb-6"
               />
