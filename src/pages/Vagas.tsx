@@ -31,7 +31,7 @@ const sampleJobs: Job[] = [
     salary: 7500,
     description: "Desenvolver interfaces de usuário modernas e responsivas utilizando React, Redux e TypeScript. Colaborar com designers e back-ends.",
     requirements: ["React", "TypeScript", "HTML5", "CSS3", "Git", "Experiência com APIs REST"],
-    imageUrl: "public/imgs/dev-front.png",
+    imageUrl: "../src/components/imgs/dev-front.png",
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const sampleJobs: Job[] = [
     salary: "A combinar",
     description: "Prestar suporte técnico a usuários internos e externos, diagnosticar e resolver problemas de hardware e software.",
     requirements: ["Conhecimento em Windows/Linux", "Redes de computadores", "Boa comunicação", "Inglês técnico"],
-    imageUrl: "public/imgs/suporte.png",
+    imageUrl: "../src/components/imgs/suporte.png",
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ const sampleJobs: Job[] = [
     salary: "2500 + Comissão",
     description: "Realizar visitas a clientes, apresentar produtos/serviços, negociar e fechar vendas.",
     requirements: ["Experiência com vendas externas", "CNH B", "Boa comunicação", "Foco em resultados"],
-    imageUrl: "public/imgs/vendedor.png",
+    imageUrl: "../src/components/imgs/vendedor.png",
   },
   {
     id: 5,
