@@ -58,3 +58,12 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+.click {
+  cursor: pointer;
+}
+
+.click:hover {
+  border: 2px rgb(116, 22, 116) solid;
+  border-radius: 18px;
+}
