@@ -29,9 +29,9 @@ const sampleTrails: KnowledgeTrail[] = [
     icon: Brain,
     imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
     videos: [
-      { id: 101, title: "Introdução à IA", url: "placeholder_video_url_1" },
-      { id: 102, title: "O que é Machine Learning?", url: "placeholder_video_url_2" },
-      { id: 103, title: "Tipos de Algoritmos", url: "placeholder_video_url_3" },
+      { id: 101, title: "Introdução à IA", url: "https://www.youtube.com/embed/Bcw5YZA-Avw" },
+      { id: 102, title: "O que é Machine Learning?", url: "https://www.youtube.com/embed/ilcbOlPNmI0" },
+      { id: 103, title: "Tipos de Algoritmos", url: "https://www.youtube.com/embed/-eypYnAMlsc" },
     ],
     quiz: [
       { id: 201, question: "O que significa IA?", options: ["Inteligência Artificial", "Internet Avançada", "Interface Adaptável"], answer: "Inteligência Artificial" },
@@ -46,8 +46,8 @@ const sampleTrails: KnowledgeTrail[] = [
     icon: Briefcase,
     imageUrl: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop",
     videos: [
-      { id: 104, title: "Princípios de Gestão", url: "placeholder_video_url_4" },
-      { id: 105, title: "Introdução a Finanças", url: "placeholder_video_url_5" },
+      { id: 104, title: "Princípios de Gestão", url: "https://www.youtube.com/embed/nM0KZu259EM" },
+      { id: 105, title: "Introdução a Finanças", url: "https://www.youtube.com/embed/6DcCq44T-iM" },
     ],
     quiz: [
       { id: 203, question: "O que é SWOT?", options: ["Ferramenta de Análise", "Tipo de Contrato", "Software de Gestão"], answer: "Ferramenta de Análise" },
@@ -141,11 +141,16 @@ const KnowledgeTrailPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {trail.videos.map(video => (
               <Card key={video.id} className="overflow-hidden">
-                {/* Placeholder para o player de vídeo */}
-                <div className="bg-muted aspect-video flex items-center justify-center text-foreground/50">
-                  Vídeo Placeholder <br /> ({video.title})
-                  {/* Em uma aplicação real, usar um player como react-player */}
-                  {/* <ReactPlayer url={video.url} width="100%" height="100%" /> */}
+                {/* --- COMPONENTE DO VÍDEO ATUALIZADO --- */}
+                <div className="bg-muted aspect-video">
+                  <iframe
+                    src={video.url}
+                    title={video.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
                 </div>
                 <CardContent className="p-4">
                   <h3 className="font-medium text-foreground">{video.title}</h3>
