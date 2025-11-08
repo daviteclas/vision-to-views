@@ -24,7 +24,7 @@ const sampleTrails: KnowledgeTrail[] = [
     description: "Entenda os conceitos básicos de IA, machine learning e como aplicá-los.",
     category: "Tecnologia",
     icon: Brain,
-    imageUrl: "../src/components/imgs/ia.png",
+    imageUrl: "../src/lib/imgs/ia.png",
   },
   {
     id: 2,
